@@ -20,4 +20,4 @@ runs:
     - name: Extract Twitch CLI
       if: runner.os == 'Linux'
       shell: bash
-      run: tar -xzf --wildcard "twitch-cli_*_Linux_*.tar.gz" && mv twitch-cli*/twitch /usr/local/bin/twitch && chmod ug+x /usr/local/bin/twitch
+      run: tar -xzf --wildcards "twitch-cli_*_Linux_*.tar.gz" && mv twitch-cli*/twitch /usr/local/bin/twitch && chmod ug+x /usr/local/bin/twitch
