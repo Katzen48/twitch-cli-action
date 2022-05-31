@@ -1,0 +1,19 @@
+name: 'Twitch CLI Action'
+description: 'Runs the Twitch CLI'
+runs:
+  using: 'composite'
+  steps:
+# Linux
+    - name: Download latest Twitch CLI
+      if: runner.os == 'Linux'
+      uses: dsaltares/fetch-gh-release-asset@master
+      with:
+        repo: 'twitchdev/twitch-cli'
+        version: 'latest'
+        token: ${{ secrets.GITHUB_TOKEN }}
+        target: 'twitch-cli.tar.gz'
+        regex: true
+        file: 'twitch-cli_*_Linux_*\\.tar\\.gz'
+    - name: Extract Twitch CLI
+      if: runner.os == 'Linux'
+      run: tar -xz twitch-cli.tar.gz && mv twitch-cli/twitch /usr/local/bin/twitch && chmod ug+x /usr/local/bin/twitch
