@@ -6,7 +6,10 @@ on:
 jobs:
   test:
     name: Run
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
     steps:
       - name: Run
         uses: katzen48/twitch-cli-action@master

@@ -3,25 +3,26 @@ description: 'Runs the Twitch CLI'
 runs:
   using: 'composite'
   steps:
-# Linux
-    - name: Download latest Twitch CLI
-      if: runner.os == 'Linux'
-      uses: dsaltares/fetch-gh-release-asset@master
-      with:
-        repo: 'twitchdev/twitch-cli'
-        version: 'latest'
-        token: ${{ github.token }}
-        regex: true
-        file: 'twitch-cli_.*_Linux_.*\.tar\.gz'
-    - name: Rename Asset
-      if: runner.os == 'Linux'
+# Linux & macOS
+    - name: Install latest Twitch CLI
+      if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
       shell: bash
-      run: mv twitch-cli_*_Linux_*.tar.gz twitch-cli.tar.gz
-    - name: Extract Twitch CLI
-      if: runner.os == 'Linux'
-      shell: bash
-      run: tar -xzf twitch-cli.tar.gz 
-    - name: Prepare executable
-      if: runner.os == 'Linux'
-      shell: bash
-      run: mv twitch-cli_*_Linux_*/twitch /usr/local/bin/twitch && chmod ug+x /usr/local/bin/twitch
+      run: brew install twitchdev/twitch/twitch-cli 
+      
+# Windows
+    - name: Set Execution Policy Scoop
+      if: ${{ runner.os == 'Windows' }}
+      shell: pwsh
+      run: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+    - name: Install Scoop
+      if: ${{ runner.os == 'Windows' }}
+      shell: pwsh
+      run: irm get.scoop.sh | iex
+    - name: Add TwitchDev Bucket
+      if: ${{ runner.os == 'Windows' }}
+      shell: pwsh
+      run: scoop bucket add twitch https://github.com/twitchdev/scoop-bucket.git
+    - name: Install latest Twitch CLI
+      if: ${{ runner.os == 'Windows' }}
+      shell: pwsh
+      run: scoop install twitch-cli
