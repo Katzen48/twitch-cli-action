@@ -32,8 +32,8 @@ runs:
       run: iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
     - name: Add to PATH
       if: ${{ runner.os == 'Windows' }}
-      shell: bash
-      run: echo "$HOME/scoop/shims" >> $GITHUB_PATH
+      shell: pwsh
+      run: echo "%USERPROFILE%/scoop/shims" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
     - name: Add TwitchDev Bucket
       if: ${{ runner.os == 'Windows' }}
       shell: pwsh
