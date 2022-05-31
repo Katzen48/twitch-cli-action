@@ -18,6 +18,10 @@ runs:
       if: ${{ runner.os == 'Windows' }}
       shell: pwsh
       run: iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+    - name: Reload Path
+      if: ${{ runner.os == 'Windows' }}
+      shell: pwsh
+      run: $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
     - name: Add TwitchDev Bucket
       if: ${{ runner.os == 'Windows' }}
       shell: pwsh
