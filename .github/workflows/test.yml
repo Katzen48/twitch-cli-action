@@ -10,3 +10,6 @@ jobs:
     steps:
       - name: Run
         uses: katzen48/twitch-cli-action@master
+      - name: Get Version
+        shell: bash
+        run: twitch version
