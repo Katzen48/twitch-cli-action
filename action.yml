@@ -17,19 +17,11 @@ runs:
       if: runner.os == 'Linux'
       shell: bash
       run: mv twitch-cli_*_Linux_*.tar.gz twitch-cli.tar.gz
-    - name: List Dir
-      if: runner.os == 'Linux'
-      shell: bash
-      run: ls
     - name: Extract Twitch CLI
       if: runner.os == 'Linux'
       shell: bash
       run: tar -xzf twitch-cli.tar.gz 
-    - name: List Dir
-      if: runner.os == 'Linux'
-      shell: bash
-      run: ls
     - name: Prepare executable
       if: runner.os == 'Linux'
       shell: bash
-      run: mv twitch-cli/twitch /usr/local/bin/twitch && chmod ug+x /usr/local/bin/twitch
+      run: mv twitch-cli_*_Linux_*/twitch /usr/local/bin/twitch && chmod ug+x /usr/local/bin/twitch
