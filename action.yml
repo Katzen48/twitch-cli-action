@@ -13,7 +13,7 @@ runs:
         token: ${{ github.token }}
         target: 'twitch-cli.tar.gz'
         regex: true
-        file: 'twitch-cli_*_Linux_*\\.tar\\.gz'
+        file: 'twitch-cli_.*_Linux_.*\\.tar\\.gz'
     - name: Extract Twitch CLI
       if: runner.os == 'Linux'
       shell: bash
