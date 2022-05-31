@@ -10,7 +10,7 @@ runs:
       with:
         repo: 'twitchdev/twitch-cli'
         version: 'latest'
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ github.token }}
         target: 'twitch-cli.tar.gz'
         regex: true
         file: 'twitch-cli_*_Linux_*\\.tar\\.gz'
