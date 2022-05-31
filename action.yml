@@ -16,4 +16,5 @@ runs:
         file: 'twitch-cli_*_Linux_*\\.tar\\.gz'
     - name: Extract Twitch CLI
       if: runner.os == 'Linux'
+      shell: bash
       run: tar -xz twitch-cli.tar.gz && mv twitch-cli/twitch /usr/local/bin/twitch && chmod ug+x /usr/local/bin/twitch

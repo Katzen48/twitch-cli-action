@@ -1,0 +1,12 @@
+name: Test Run
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run
+        uses: katzen48/twitch-cli-action@master
