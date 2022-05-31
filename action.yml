@@ -22,18 +22,7 @@ runs:
       run: brew install twitchdev/twitch/twitch-cli 
       
 # Windows
-    - name: Set Execution Policy Scoop
-      if: ${{ runner.os == 'Windows' }}
-      shell: pwsh
-      run: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-    - name: Install Scoop
-      if: ${{ runner.os == 'Windows' }}
-      shell: pwsh
-      run: iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
-    - name: Add to PATH
-      if: ${{ runner.os == 'Windows' }}
-      shell: pwsh
-      run: echo "%USERPROFILE%/scoop/shims" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
+    - uses: MinoruSekine/setup-scoop@v1
     - name: Add TwitchDev Bucket
       if: ${{ runner.os == 'Windows' }}
       shell: pwsh
