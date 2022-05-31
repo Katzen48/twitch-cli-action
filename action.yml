@@ -11,7 +11,6 @@ runs:
         repo: 'twitchdev/twitch-cli'
         version: 'latest'
         token: ${{ github.token }}
-        target: 'twitch-cli.tar.gz'
         regex: true
         file: 'twitch-cli_.*_Linux_.*\.tar\.gz'
     - name: List Dir
@@ -21,4 +20,4 @@ runs:
     - name: Extract Twitch CLI
       if: runner.os == 'Linux'
       shell: bash
-      run: tar -xzf twitch-cli.tar.gz && mv twitch-cli/twitch /usr/local/bin/twitch && chmod ug+x /usr/local/bin/twitch
+      run: tar -xzf --wildcard "twitch-cli_*_Linux_*.tar.gz" && mv twitch-cli*/twitch /usr/local/bin/twitch && chmod ug+x /usr/local/bin/twitch
