@@ -13,6 +13,10 @@ runs:
         token: ${{ github.token }}
         regex: true
         file: 'twitch-cli_.*_Linux_.*\.tar\.gz'
+    - name: Rename Asset
+      if: runner.os == 'Linux'
+      shell: bash
+      run: mv twitch-cli_*_Linux_*.tar.gz twitch-cli.tar.gz
     - name: List Dir
       if: runner.os == 'Linux'
       shell: bash
@@ -20,4 +24,4 @@ runs:
     - name: Extract Twitch CLI
       if: runner.os == 'Linux'
       shell: bash
-      run: tar -xzf --wildcards "twitch-cli_*_Linux_*.tar.gz" && mv twitch-cli*/twitch /usr/local/bin/twitch && chmod ug+x /usr/local/bin/twitch
+      run: tar -xzf twitch-cli_*_Linux_*.tar.gz && mv twitch-cli*/twitch /usr/local/bin/twitch && chmod ug+x /usr/local/bin/twitch
