@@ -1,5 +1,17 @@
 name: 'Twitch CLI Action'
 description: 'Runs the Twitch CLI'
+
+inputs:
+  mock:
+    description: Whether to start the API Mock Server (beta)
+    default: false
+  events:
+    description: Which Events to mock (EventSub) [Comma-seperated]
+    default: ''
+  eventsub_endpoint:
+    description: URL of the Endpoint, which shall accept the events
+    default: ''
+
 runs:
   using: 'composite'
   steps:
@@ -18,15 +30,11 @@ runs:
       if: ${{ runner.os == 'Windows' }}
       shell: pwsh
       run: iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
-    - name: Reload Path
-      if: ${{ runner.os == 'Windows' }}
-      shell: pwsh
-      run: $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
     - name: Add TwitchDev Bucket
       if: ${{ runner.os == 'Windows' }}
       shell: pwsh
-      run: scoop bucket add twitch https://github.com/twitchdev/scoop-bucket.git
+      run: $env:Path += ';%USERPROFILE%\scoop\shims' && scoop bucket add twitch https://github.com/twitchdev/scoop-bucket.git
     - name: Install latest Twitch CLI
       if: ${{ runner.os == 'Windows' }}
       shell: pwsh
-      run: scoop install twitch-cli
+      run: $env:Path += ';%USERPROFILE%\scoop\shims' && scoop install twitch-cli
