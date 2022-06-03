@@ -56,7 +56,7 @@ runs:
       env:
         ACTION_TWITCH_MOCK_PORT: ${{ inputs.mock_port }}
         ACTION_TWITCH_MOCK_COMMAND: ${{ inputs.mock_command }}
-      run: ${{ github.action_path }}/mock.sh
+      run: chmod u+x ${{ github.action_path }}/mock.sh && ${{ github.action_path }}/mock.sh
 
     - name: Mock Events
       shell: bash
@@ -64,4 +64,4 @@ runs:
       env:
         ACTION_TWITCH_EVENTS: ${{ inputs.events }}
         ACTION_TWITCH_EVENTS_ENDPOINT: ${{ inputs.events_endpoint }}
-      run: ${{ github.action_path }}/events.sh
+      run: chmod u+x ${{ github.action_path }}/events.sh && ${{ github.action_path }}/events.sh
