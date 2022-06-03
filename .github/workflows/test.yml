@@ -15,7 +15,7 @@ jobs:
       - name: Run
         uses: katzen48/twitch-cli-action@master
         with:
-          mock_command: curl http://localhost:8080/units/users
+          mock_command: curl http://localhost:8080/units/users -H "Accept: application/json"
           
       - name: Get Version
         shell: bash
