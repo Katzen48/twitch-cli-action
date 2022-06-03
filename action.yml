@@ -2,14 +2,20 @@ name: 'Twitch CLI Action'
 description: 'Runs the Twitch CLI'
 
 inputs:
-  mock:
-    description: Whether to start the API Mock Server (beta)
-    default: false
+  mock_port:
+    description: The port of the API Mock Server (beta)
+    default: 8080
+  mock_command:
+    description: The command to execute after starting the API Mock Server (beta)
+    default: ''
   events:
     description: Which Events to mock (EventSub) [Comma-seperated]
     default: ''
-  eventsub_endpoint:
+  events_endpoint:
     description: URL of the Endpoint, which shall accept the events
+    default: ''
+  events_command:
+    description: The command to execute before mocking the events
     default: ''
 
 runs:
@@ -42,3 +48,19 @@ runs:
       if: ${{ runner.os == 'Windows' }}
       shell: pwsh
       run: scoop install twitch-cli
+      
+# Common
+    - name: Run Mock Server
+      shell: bash
+      if: ${{ inputs.mock_command != '' }}
+      env:
+        ACTION_TWITCH_MOCK_PORT: ${{ inputs.mock_port }}
+        ACTION_TWITCH_MOCK_COMMAND: ${{ inputs.mock_command }}
+      run: ./mock.sh
+
+    - name: Mock Events
+      shell: bash
+      if: ${{ inputs.events != '' && inputs.events_endpoint != '' && inputs.events_command != '' }}
+        ACTION_TWITCH_EVENTS: ${{ inputs.events }}
+        ACTION_TWITCH_EVENTS_ENDPOINT: ${{ inputs.events_endpoint }}
+      run: ./events.sh

@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Run
         uses: katzen48/twitch-cli-action@master
+        with:
+          mock_command: curl http://localhost:8080/units
+          
       - name: Get Version
         shell: bash
         run: twitch version
