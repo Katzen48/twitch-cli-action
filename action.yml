@@ -61,6 +61,7 @@ runs:
     - name: Mock Events
       shell: bash
       if: ${{ inputs.events != '' && inputs.events_endpoint != '' && inputs.events_command != '' }}
+      env:
         ACTION_TWITCH_EVENTS: ${{ inputs.events }}
         ACTION_TWITCH_EVENTS_ENDPOINT: ${{ inputs.events_endpoint }}
       run: ./events.sh
