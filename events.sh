@@ -1,6 +1,8 @@
 #!/bin/sh
-eval $ACTION_TWITCH_MOCK_PORT &
+eval $ACTION_TWITCH_MOCK_COMMAND &
 TWITCH_EVENTS_PID=$!
+
+sleep 10
 
 for type in ${ACTION_TWITCH_EVENTS//,/ }
 do
