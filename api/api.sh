@@ -10,6 +10,6 @@ then
 fi
 
 RESPONSE="$($COMMAND 2>&1)"
-RESPONSE="response=$RESPONSE"
+RESPONSE=$(echo "$RESPONSE" | jq -c)
 
-echo "$RESPONSE" >> $GITHUB_OUTPUT
+echo "response=$RESPONSE" >> $GITHUB_OUTPUT
