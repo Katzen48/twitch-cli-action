@@ -1,0 +1,18 @@
+name: 'Configure Twitch CLI'
+description: 'Configure the Twitch CLI'
+
+inputs:
+  client_id:
+    description: Which Events to mock (EventSub) [Comma-seperated]
+    default: ''
+    required: true
+  client_secret:
+    description: URL of the Endpoint, which shall accept the events
+    default: ''
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      run: twitch configure -i ${{ inputs.client_id }} -s ${{ inputs.client_secret }}

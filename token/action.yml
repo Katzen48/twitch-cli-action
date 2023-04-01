@@ -1,0 +1,25 @@
+name: 'Twitch Token'
+description: 'Fetch/Revoke the token'
+
+inputs:
+  client_id:
+    description: Which Events to mock (EventSub) [Comma-seperated]
+    default: ''
+  token:
+    description: Token to revoke
+    default: ''
+
+outputs:
+  token:
+    description: The fetched token, if any
+    value: ${{ steps.call.token.token }}
+
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      id: token
+      env:
+        ACTION_TWITCH_CLIENT_ID: ${{ inputs.client_id }}
+        ACTION_TWITCH_TOKEN: ${{ inputs.token }}
+      run: chmod u+x $GITHUB_ACTION_PATH/token.sh && $GITHUB_ACTION_PATH/token.sh

@@ -1,0 +1,26 @@
+name: 'Trigger Events'
+description: 'Triggers Eventsub events'
+
+inputs:
+  events:
+    description: Which Events to mock (EventSub) [Comma-seperated]
+    default: ''
+    required: true
+  endpoint:
+    description: URL of the Endpoint, which shall accept the events
+    default: ''
+    required: true
+  command:
+    description: The command to execute before mocking the events
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Trigger Events
+      shell: bash
+      env:
+        ACTION_TWITCH_EVENTS: ${{ inputs.events }}
+        ACTION_TWITCH_EVENTS_ENDPOINT: ${{ inputs.endpoint }}
+        ACTION_TWITCH_MOCK_COMMAND: ${{ inputs.command }}
+      run: chmod u+x $GITHUB_ACTION_PATH/events.sh && $GITHUB_ACTION_PATH/events.sh

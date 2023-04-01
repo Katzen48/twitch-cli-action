@@ -14,11 +14,26 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
     steps:
+      - name: Install
+        uses: katzen48/twitch-cli-action/install@master
+      - name: Get Version
+        shell: bash
+        run: twitch version
+      - name: Configure
+        uses: katzen48/twitch-cli-action/configure@master
+        with:
+          client_id: ${{ secrets.CLIENT_ID }}
+          client_secret: ${{ secrets.CLIENT_SECRET }}
+      - name: Get Token
+        id: token
+        uses: katzen48/twitch-cli-action/token@master
       - name: Run
         uses: katzen48/twitch-cli-action@master
         with:
           mock_command: 'curl http://localhost:8080/units/users -H "Accept: application/json"'
-          
-      - name: Get Version
-        shell: bash
-        run: twitch version
+      - name: Revoke Token
+        if: ${{ always() }}
+        uses: katzen48/twitch-cli-action/token@master
+        with:
+          client_id: ${{ secrets.CLIENT_ID }}
+          token: ${{ steps.token.outputs.token }}

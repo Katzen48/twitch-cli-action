@@ -1,0 +1,33 @@
+name: 'Install Twitch CLI'
+description: 'Installs the Twitch CLI'
+
+runs:
+  using: 'composite'
+  steps:
+    # Linux & macOS
+    - name: Install latest Twitch CLI
+      if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
+      shell: bash
+      run: brew install twitchdev/twitch/twitch-cli 
+      
+    # Windows
+    - name: Set Execution Policy Scoop
+      if: ${{ runner.os == 'Windows' }}
+      shell: pwsh
+      run: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+    - name: Install Scoop
+      if: ${{ runner.os == 'Windows' }}
+      shell: pwsh
+      run: iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+    - name: Add to PATH
+      if: ${{ runner.os == 'Windows' }}
+      shell: pwsh
+      run: Join-Path (Resolve-Path ~).Path "scoop\shims" >> $Env:GITHUB_PATH
+    - name: Add TwitchDev Bucket
+      if: ${{ runner.os == 'Windows' }}
+      shell: pwsh
+      run: scoop bucket add twitch https://github.com/twitchdev/scoop-bucket.git
+    - name: Install latest Twitch CLI
+      if: ${{ runner.os == 'Windows' }}
+      shell: pwsh
+      run: scoop install twitch-cli
