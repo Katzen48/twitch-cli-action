@@ -31,6 +31,18 @@ jobs:
         uses: katzen48/twitch-cli-action/mock-api@master
         with:
           command: 'curl http://localhost:8080/units/users -H "Accept: application/json"'
+      - name: Get from API
+        id: api
+        uses: katzen48/twitch-cli-action/api@master
+        with:
+          method: get
+          endpoint: users
+          query_parameters: login=katzen48
+      - name: Echo API Response
+        shell: bash
+        env:
+          RESPONSE: ${{ steps.api.outputs.response }}
+        run: echo "$RESPONSE"
       - name: Revoke Token
         if: ${{ always() }}
         uses: katzen48/twitch-cli-action/token@master
