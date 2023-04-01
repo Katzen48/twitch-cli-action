@@ -27,4 +27,4 @@ runs:
         ACTION_TWITCH_METHOD: ${{ inputs.method }}
         ACTION_TWITCH_ENDPOINT: ${{ inputs.endpoint }}
         ACTION_TWITCH_QUERY_PARAMETERS: ${{ inputs.query_parameters }}
-      run: chmod u+x $GITHUB_ACTION_PATH/api.sh && echo "response=$($GITHUB_ACTION_PATH/api.sh)" >> $GITHUB_OUTPUT
+      run: chmod u+x $GITHUB_ACTION_PATH/api.sh && $GITHUB_ACTION_PATH/api.sh

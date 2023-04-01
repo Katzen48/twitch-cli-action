@@ -9,4 +9,5 @@ then
   done
 fi
 
-eval "$COMMAND"
+RESPONSE="$($COMMAND 2>&1)"
+echo "response=$($RESPONSE)" >> "$GITHUB_OUTPUT"
