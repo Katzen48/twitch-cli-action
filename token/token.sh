@@ -3,7 +3,7 @@ if [ -n "$ACTION_TWITCH_CLIENT_ID" ] && [ -n "$ACTION_TWITCH_TOKEN" ]
 then
   echo 'Revoking Token'
 
-  eval "twitch token -r $ACTION_TWITCH_TOKEN --client-id $ACTION_TWITCH_CLIENT_ID"
+  eval "twitch token -r $ACTION_TWITCH_TOKEN --client-id $ACTION_TWITCH_CLIENT_ID &> /dev/null"
 else
   echo 'Getting Token'
 

@@ -5,6 +5,10 @@ runs:
   using: 'composite'
   steps:
     # Linux & macOS
+    - name: Set up Homebrew
+      if: ${{ runner.os == 'Linux' }}
+      id: set-up-homebrew
+      uses: Homebrew/actions/setup-homebrew@master
     - name: Install latest Twitch CLI
       if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
       shell: bash
