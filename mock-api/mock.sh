@@ -5,7 +5,7 @@ TWITCH_CLI_PID=$!
 
 sleep 5
 
-if [ -z "$ACTION_TWITCH_MOCK_COMMAND" ]
+if [ -n "$ACTION_TWITCH_MOCK_COMMAND" ]
 then
   eval "$ACTION_TWITCH_MOCK_COMMAND"
 

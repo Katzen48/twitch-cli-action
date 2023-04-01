@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -z "$ACTION_TWITCH_CLIENT_ID" ] && [ -z "$ACTION_TWITCH_TOKEN" ]
+if [ -n "$ACTION_TWITCH_CLIENT_ID" ] && [ -n "$ACTION_TWITCH_TOKEN" ]
 then
   eval "twitch token -r $ACTION_TWITCH_TOKEN --client-id $ACTION_TWITCH_CLIENT_ID"
 else

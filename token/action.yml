@@ -4,10 +4,8 @@ description: 'Fetch/Revoke the token'
 inputs:
   client_id:
     description: Which Events to mock (EventSub) [Comma-seperated]
-    default: ''
   token:
     description: Token to revoke
-    default: ''
 
 outputs:
   token:

@@ -27,10 +27,10 @@ jobs:
       - name: Get Token
         id: token
         uses: katzen48/twitch-cli-action/token@master
-      - name: Run
-        uses: katzen48/twitch-cli-action@master
+      - name: Mock API
+        uses: katzen48/twitch-cli-action/mock-api@master
         with:
-          mock_command: 'curl http://localhost:8080/units/users -H "Accept: application/json"'
+          command: 'curl http://localhost:8080/units/users -H "Accept: application/json"'
       - name: Revoke Token
         if: ${{ always() }}
         uses: katzen48/twitch-cli-action/token@master
