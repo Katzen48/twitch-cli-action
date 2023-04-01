@@ -5,5 +5,5 @@ then
 else
   TOKEN=$(twitch token 2>&1)
   TOKEN=$(echo "$TOKEN" | awk '{print $NF}')
-  echo "token=$($TOKEN)" >> "$GITHUB_OUTPUT"
+  echo "token=$TOKEN" >> "$GITHUB_OUTPUT"
 fi
