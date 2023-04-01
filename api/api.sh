@@ -10,4 +10,4 @@ then
 fi
 
 RESPONSE="$($COMMAND 2>&1)"
-echo "response=$RESPONSE" >> "$GITHUB_OUTPUT"
+echo ::set-output name=response::"$RESPONSE"
